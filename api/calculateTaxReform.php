@@ -315,13 +315,16 @@ class CalculateTaxReform
 
     private function classifyDifference(float $difference): string
     {
-        return match (true) {
-            $difference > 0 => 'aumento de carga',
-            $difference < 0 => 'redução de carga',
-            default => 'neutro',
-        };
-    }
+        if ($difference > 0) {
+            return 'aumento de carga';
+        }
 
+        if ($difference < 0) {
+            return 'redução de carga';
+        }
+
+        return 'neutro';
+    }
     private function calculateDifferencePercentPoints(float $before, float $after): float
     {
         if ($before <= 0.0) {
